@@ -1,8 +1,8 @@
 <template>
   <div class="main">
     <Header />
+    <router-view/>
   </div>
-  <div class="footer">footer</div>
 </template>
 
 <script lang="ts" setup>

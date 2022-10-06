@@ -9,6 +9,7 @@
       active-text-color="#ffd04b"
       @select="handleSelect"
       :router="true"
+      :ellipsis="false"
     >
       <el-menu-item index="/">首页</el-menu-item>
       <el-sub-menu index="2">
@@ -18,7 +19,7 @@
         <el-menu-item index="2-3">技术杂烩</el-menu-item>
         <el-menu-item index="2-4">心情随笔</el-menu-item >
       </el-sub-menu>
-      <el-menu-item index="4">Orders</el-menu-item>
+      <el-menu-item index="4">动态</el-menu-item>
       <div class="flex-grow" />
       <el-menu-item index="5" class="setting">
         <el-icon>

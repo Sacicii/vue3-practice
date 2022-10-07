@@ -2,6 +2,8 @@
   <router-view/>
 </template>
 
+<script src="@/assets/iconfont/iconfont.js"></script>
+
 <style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

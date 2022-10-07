@@ -11,15 +11,30 @@
       :router="true"
       :ellipsis="false"
     >
-      <el-menu-item index="/">首页</el-menu-item>
+      <el-menu-item index="/">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-home"></use>
+        </svg>
+        <span>首页</span>
+      </el-menu-item>
       <el-sub-menu index="2">
-        <template #title>分类</template>
+        <template #title>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-bulb"></use>
+          </svg>
+          <span>分类</span>
+        </template>
         <el-menu-item index="/setting">学习笔记</el-menu-item>
         <el-menu-item index="2-2">个人项目</el-menu-item>
         <el-menu-item index="2-3">技术杂烩</el-menu-item>
         <el-menu-item index="2-4">心情随笔</el-menu-item >
       </el-sub-menu>
-      <el-menu-item index="4">动态</el-menu-item>
+      <el-menu-item index="4">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-shejiaotubiao-02"></use>
+        </svg>
+        <span>动态</span>
+      </el-menu-item>
       <div class="flex-grow" />
       <el-menu-item index="5" class="setting">
         <el-icon>
@@ -37,6 +52,15 @@
 
 <style lang="less" scoped>
 @menu-active: #ff7675;
+
+.top-menu-wrapper{
+  user-select: none;
+  .el-menu-item, .el-sub-menu{
+    span{
+      padding-left: .1rem;
+    }
+  }
+}
 /deep/.el-menu .el-menu-item:hover{
   outline: 0 !important;
   color: @menu-active !important;

@@ -1,7 +1,7 @@
 <template>
   <div class="top-menu-wrapper">
     <div class="logo">
-      <span>Sacicii's Blog</span>
+      <span @click="jumpToHome">Sacicii's Blog</span>
     </div>
     <div class="el-menu-wrapper">
       <el-menu
@@ -15,12 +15,6 @@
         :router="true"
         :ellipsis="false"
       >
-        <el-menu-item index="/">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-home"></use>
-          </svg>
-          <span>首页</span>
-        </el-menu-item>
         <el-sub-menu index="2">
           <template #title>
             <svg class="icon" aria-hidden="true">
@@ -28,12 +22,12 @@
             </svg>
             <span>分类</span>
           </template>
-          <el-menu-item index="/setting">学习笔记</el-menu-item>
+          <el-menu-item index="1">学习笔记</el-menu-item>
           <el-menu-item index="2-2">个人项目</el-menu-item>
           <el-menu-item index="2-3">技术杂烩</el-menu-item>
           <el-menu-item index="2-4">心情随笔</el-menu-item >
         </el-sub-menu>
-        <el-menu-item index="4">
+        <el-menu-item index="/about">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shejiaotubiao-02"></use>
           </svg>
@@ -42,12 +36,19 @@
       </el-menu>
     </div>
     <!-- 搜索 -->
-    <div class="search">
+    <div :class="{'search': true, 'input-focus': isActive}">
       <el-input
         v-model="searchValue"
-        placeholder="i wanna search something..."
-        :prefix-icon="Search"
-      />
+        placeholder="i wanna search..."
+        @focus="isActive = true"  
+        @blur="isActive = false" 
+      >
+        <template #suffix>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-search1"></use>
+          </svg>
+        </template>
+      </el-input>
     </div>
     <!-- 设置 -->
     <div class="setting">
@@ -56,12 +57,24 @@
       </el-icon>
     </div>
   </div>
-
 </template>
 
 <script lang="ts" setup>
   import {ref} from 'vue'
+  import {useRouter} from 'vue-router'
+
+  const router = useRouter()
+
+  const jumpToHome = () => {
+    router.push({ path: '/'})
+  }
+
   let searchValue = ref('')
+
+  let isActive = ref(false)
+
+
+
 </script>
 
 <style lang="less" scoped>
@@ -73,6 +86,13 @@
   font-size: .14rem;
   user-select: none;
   height: .58rem;
+  width: 100%;
+  background: rgba(100,100,100,.5);
+  // z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   .logo{
     width: 20%;
     height: .58rem;
@@ -88,32 +108,34 @@
       font-weight: bold;
       font-style: italic;
       animation: shake .5s ease-in-out 1.7;
+      &:hover{
+        animation: shake .5s ease-in-out infinite;
+      }
     }
   }
   .el-menu-wrapper{
     width: 50%
   }
+  // search
   .search{
     width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
-    .search-input{
-      height: .35rem;
-      background: transparent;
-      /deep/ .el-input__wrapper{
-        border: none;
-        background: transparent;
-        .el-input__inner{
-          color: gray;
-        }
+    .el-input{
+      width: 60%;
+      transition: .8s;
+      /deep/.el-input__inner {
+      // 设置光标颜色
+      caret-color: #11be59;
       }
-      /deep/ .el-input-group__append{
-        background: transparent;
-        .el-icon{
-          color: gray;
-        }
-      }
+    }
+  }
+  // search框聚焦
+  .input-focus{
+    .el-input{
+      width: 90% ;
+      transition: .8s;
     }
   }
   .setting{
@@ -137,7 +159,7 @@
   }
 }
 
-// 文本抖动动画
+// logo文本抖动动画
 @keyframes shake {
   0%, 100% {
     text-shadow: -1.5px -1.5px 0 #0ff, 1.5px 1.5px 0 #f00;
